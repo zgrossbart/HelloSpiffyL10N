@@ -20,7 +20,7 @@ This application was created with the [Spiffy UI project builder](http://www.spi
 
 ### Added localization support to my GWT module ###
 
-To support localization in GWT you have to enabled in your GWT module file.  In this project that file is 'src/main/java/org/spiffyui/hellospiffylocalization/index.gwt.xml'.
+To support localization in GWT you have to enabled in your GWT module file.  In this project that file is `src/main/java/org/spiffyui/hellospiffylocalization/index.gwt.xml`.
 
 The first step is to import the localization module:
 
@@ -36,7 +36,7 @@ That will make sure the GWT compiler creates output for French as well as Englis
 
 GWT can figure out the correct language based on the browser's installed locale, but not the preferred locale.  That means you would have to installed Mozilla in French instead of just specifying French in your preferences.  This is especially problematic because your browser can send one locale to the server and another one to GWT resulting an in application that half one language and half another.  It isn't GWT's fault, there just isn't a good way to get proper locale information in JavaScript.
 
-The solution is a locale filter.  Spiffy UI comes with a set of servlet filters which inject the correct HTML meta tags for determining the locale for GWT.  The easiest one is [GWTLocaleBundleFilter](http://www.spiffyui.org/javadoc/org/spiffyui/server/filter/GWTLocaleBundleFilter.html).  This filter figures out the right locale by looking at the message bundles in your application.  We extend it with a one-line filter named 'LocaleFilter.java':
+The solution is a locale filter.  Spiffy UI comes with a set of servlet filters which inject the correct HTML meta tags for determining the locale for GWT.  The easiest one is [GWTLocaleBundleFilter](http://www.spiffyui.org/javadoc/org/spiffyui/server/filter/GWTLocaleBundleFilter.html).  This filter figures out the right locale by looking at the message bundles in your application.  We extend it with a one-line filter named `LocaleFilter.java`:
 
         public class LocaleFilter extends GWTLocaleBundleFilter
         {
@@ -51,7 +51,7 @@ This filter tells the GWTLocaleBundlerFilter where our properties files are and 
 
 ### Added localized strings ###
 
-This application has user visible strings in two places.  The first is 'src/main/java/org/spiffyui/hellospiffylocalization/client/MainPanel.html'.  This HTML file has most of the strings in our UI.  We can localize it by creating a new file:  'src/main/java/org/spiffyui/hellospiffylocalization/client/MainPanel_fr.html'.
+This application has user visible strings in two places.  The first is `src/main/java/org/spiffyui/hellospiffylocalization/client/MainPanel.html`.  This HTML file has most of the strings in our UI.  We can localize it by creating a new file:  `src/main/java/org/spiffyui/hellospiffylocalization/client/MainPanel_fr.html`.
 
 This new file contains the same content but in French.  It still has the same HTML placeholders for our controls, they are just surrounded by French.  For example:
 
@@ -63,9 +63,9 @@ becomes
         
 Once we've translated the entire file we make sure to save it in [UTF-8](http://en.wikipedia.org/wiki/UTF-8) format.
 
-The rest of the strings for our application are located in 'src/main/java/org/spiffyui/hellospiffylocalization/client/Index.java'.  These are just a few strings that are used with dynamic content.  For these strings we create a GWT [Messages](http://google-web-toolkit.googlecode.com/svn/javadoc/2.1/com/google/gwt/i18n/client/Messages.html) class.
+The rest of the strings for our application are located in `src/main/java/org/spiffyui/hellospiffylocalization/client/Index.java`.  These are just a few strings that are used with dynamic content.  For these strings we create a GWT [Messages](http://google-web-toolkit.googlecode.com/svn/javadoc/2.1/com/google/gwt/i18n/client/Messages.html) class.
 
-Our Messages class is 'src/main/java/org/spiffyui/hellospiffylocalization/client/ProjStrings.java'.  It is a simple interface with one method for each localized string like this:
+Our Messages class is `src/main/java/org/spiffyui/hellospiffylocalization/client/ProjStrings.java`.  It is a simple interface with one method for each localized string like this:
 
         public interface ProjStrings extends Messages
         {
