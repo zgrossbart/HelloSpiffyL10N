@@ -19,16 +19,6 @@
 
   <filter-mapping>
     <filter-name>SampleLocaleFilter</filter-name>
-    <url-pattern>/index-debug.html</url-pattern>
-  </filter-mapping>
-
-  <filter-mapping>
-    <filter-name>SampleLocaleFilter</filter-name>
-    <url-pattern>/index-test.html</url-pattern>
-  </filter-mapping>
-
-  <filter-mapping>
-    <filter-name>SampleLocaleFilter</filter-name>
     <url-pattern>/index.html</url-pattern>
   </filter-mapping>
   
