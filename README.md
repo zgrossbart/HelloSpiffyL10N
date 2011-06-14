@@ -63,7 +63,7 @@ becomes the French string:
         
 Once we've translated the entire file we make sure to save it in [UTF-8](http://en.wikipedia.org/wiki/UTF-8) format so the French chracters will be encoded correctly.
 
-The rest of the strings for our application are located in `src/main/java/org/spiffyui/hellospiffylocalization/client/Index.java`.  These are just a few strings that are used with dynamic content.  For these strings we create a GWT [Messages](http://google-web-toolkit.googlecode.com/svn/javadoc/2.1/com/google/gwt/i18n/client/Messages.html) class.
+The rest of the strings for our application are located in `src/main/java/org/spiffyui/hellospiffylocalization/client/Index.java`.  These are just a few strings that are used with dynamic content.  For these strings we create a GWT [Messages](http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/gwt/i18n/client/Messages.html) class.
 
 Our Messages class is `src/main/java/org/spiffyui/hellospiffylocalization/client/ProjStrings.java`.  It is a simple interface with one method for each localized string.  For example:
 
