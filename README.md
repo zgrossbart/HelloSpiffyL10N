@@ -16,11 +16,11 @@ This will download Apache Ivy and the other the required libraries, build the He
 How It Works
 --------------------------------------
 
-This application was created with the [Spiffy UI project builder](http://www.spiffyui.org/#!getStarted) and then edited to support French.  You can see it work by setting your preferred locale to French in your browser.  To make this work I made the following changes in my project:
+This application was created with the [Spiffy UI project builder](http://www.spiffyui.org/#!getStarted) and then edited to support French as well as English.  You can see it work by setting your preferred locale to French in your browser.  To make this work I made the following changes in my project:
 
 ### Added localization support to my GWT module ###
 
-To support localization in GWT you have to enabled in your GWT module file.  In this project that file is `src/main/java/org/spiffyui/hellospiffylocalization/index.gwt.xml`.
+To support localization in GWT you have to enable it in your GWT module file.  In this project that file is `src/main/java/org/spiffyui/hellospiffylocalization/index.gwt.xml`.
 
 The first step is to import the localization module:
 
@@ -30,13 +30,13 @@ Then we need to specify which languages we want to support:
 
         <extend-property name="locale" values="fr" />
         
-That will make sure the GWT compiler creates output for French as well as English.
+We'll add French and we get English by default.  Adding this locale causes the GWT compiler to create output for French as well as English.
 
 ### Created a locale filter ###
 
-GWT can figure out the correct language based on the browser's installed locale, but not the preferred locale.  That means you would have to installed Mozilla in French instead of just specifying French in your preferences.  This is especially problematic because your browser can send one locale to the server and another one to GWT resulting an in application that half one language and half another.  It isn't GWT's fault, there just isn't a good way to get proper locale information in JavaScript.
+GWT can figure out the correct language based on the browser's installed locale, but not the preferred locale.  That means you would have to installed Mozilla in French instead of just specifying French in your preferences.  This is especially problematic because your browser can send one locale to the server and another one to GWT resulting an in application that's half one language and half another.  It isn't GWT's fault, there just isn't a good way to get correct locale information in JavaScript.
 
-The solution is a locale filter.  Spiffy UI comes with a set of servlet filters which inject the correct HTML meta tags for determining the locale for GWT.  The easiest one is [GWTLocaleBundleFilter](http://www.spiffyui.org/javadoc/org/spiffyui/server/filter/GWTLocaleBundleFilter.html).  This filter figures out the right locale by looking at the message bundles in your application.  We extend it with a one-line filter named `LocaleFilter.java`:
+The solution is a locale filter.  Spiffy UI comes with a set of servlet filters which inject the correct HTML meta tags for determining the locale for GWT.  The easiest one is [GWTLocaleBundleFilter](http://www.spiffyui.org/javadoc/org/spiffyui/server/filter/GWTLocaleBundleFilter.html).  This filter figures out the supported locales by looking at the properties files in your application and then finds the bst match between the locales your application supports and the ones the browser requets.  We extend it with a one-line filter named `LocaleFilter.java`:
 
         public class LocaleFilter extends GWTLocaleBundleFilter
         {
@@ -53,19 +53,19 @@ This filter tells the GWTLocaleBundlerFilter where our properties files are and 
 
 This application has user visible strings in two places.  The first is `src/main/java/org/spiffyui/hellospiffylocalization/client/MainPanel.html`.  This HTML file has most of the strings in our UI.  We can localize it by creating a new file:  `src/main/java/org/spiffyui/hellospiffylocalization/client/MainPanel_fr.html`.
 
-This new file contains the same content but in French.  It still has the same HTML placeholders for our controls, they are just surrounded by French.  For example:
+This new file same asic structure as our English file, but all the content is in French.  It still has the same HTML placeholders for our controls, they are just surrounded by French.  For example, the English string:
 
         Enter your name: <span id="nameField"></span> <span id="submitButton"></span>
         
-becomes
+becomes the French string:
 
         Entrez votre nom: <span id="nameField"></span> <span id="submitButton"></span>
         
-Once we've translated the entire file we make sure to save it in [UTF-8](http://en.wikipedia.org/wiki/UTF-8) format.
+Once we've translated the entire file we make sure to save it in [UTF-8](http://en.wikipedia.org/wiki/UTF-8) format so the French chracters will be encoded correctly.
 
 The rest of the strings for our application are located in `src/main/java/org/spiffyui/hellospiffylocalization/client/Index.java`.  These are just a few strings that are used with dynamic content.  For these strings we create a GWT [Messages](http://google-web-toolkit.googlecode.com/svn/javadoc/2.1/com/google/gwt/i18n/client/Messages.html) class.
 
-Our Messages class is `src/main/java/org/spiffyui/hellospiffylocalization/client/ProjStrings.java`.  It is a simple interface with one method for each localized string like this:
+Our Messages class is `src/main/java/org/spiffyui/hellospiffylocalization/client/ProjStrings.java`.  It is a simple interface with one method for each localized string.  For example:
 
         public interface ProjStrings extends Messages
         {
@@ -77,12 +77,12 @@ Each string is in a properties file with a property of the same name as the meth
         hello = Hello Spiffy Localization!
         ...
         
-We then create a second file with the French strings like ProjStrings_fr.properties:
+We then create a second file with the French strings named ProjStrings_fr.properties.  The property names stay the same and the strings are in French:
 
         hello = Salut Spiffy Localisation!
         ...
         
-Once we've created this Message class we can call it from inside Index.java just by calling each method:
+Once we've created this ProjStrings class and properties files we can call it from inside Index.java like it was a first-class Java object.  For example:
 
         ProjStrings PROJ_STRINGS = (ProjStrings) GWT.create(ProjStrings.class);
         header.setHeaderTitle(PROJ_STRINGS.hello());
