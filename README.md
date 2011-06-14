@@ -20,7 +20,7 @@ This application was created with the [Spiffy UI project builder](http://www.spi
 
 ### Added localization support to my GWT module ###
 
-To support localization in GWT you have to enable it in your GWT module file.  In this project that file is `src/main/java/org/spiffyui/hellospiffylocalization/index.gwt.xml`.
+To support localization in GWT you have to enable it in your GWT module file.  In this project, that file is `src/main/java/org/spiffyui/hellospiffylocalization/index.gwt.xml`.
 
 The first step is to import the localization module:
 
@@ -34,9 +34,9 @@ We'll add French and we get English by default.  Adding this locale causes the G
 
 ### Created a locale filter ###
 
-GWT can figure out the correct language based on the browser's installed locale, but not the preferred locale.  That means you would have to installed Mozilla in French instead of just specifying French in your preferences.  This is especially problematic because your browser can send one locale to the server and another one to GWT resulting an in application that's half one language and half another.  It isn't GWT's fault, there just isn't a good way to get correct locale information in JavaScript.
+GWT can figure out the correct language based on the browser's installed locale, but not the preferred locale.  That means you would have to installed Mozilla in French instead of just specifying French in your preferences.  This is especially problematic because your browser can send one locale to the server and another one to GWT resulting an in application that's half one language and half another.  It isn't GWT's fault -- there just isn't a good way to get correct locale information in JavaScript.
 
-The solution is a locale filter.  Spiffy UI comes with a set of servlet filters which inject the correct HTML meta tags for determining the locale for GWT.  The easiest one is [GWTLocaleBundleFilter](http://www.spiffyui.org/javadoc/org/spiffyui/server/filter/GWTLocaleBundleFilter.html).  This filter figures out the supported locales by looking at the properties files in your application and then finds the bst match between the locales your application supports and the ones the browser requets.  We extend it with a one-line filter named `LocaleFilter.java`:
+The solution is a locale filter.  Spiffy UI comes with a set of servlet filters which inject the correct HTML meta tags for determining the locale for GWT.  The easiest one is [GWTLocaleBundleFilter](http://www.spiffyui.org/javadoc/org/spiffyui/server/filter/GWTLocaleBundleFilter.html).  This filter figures out the supported locales by looking at the properties files in your application and then finds the best match between the locales your application supports and the ones the browser requests.  We extend it with a one-line filter named `LocaleFilter.java`:
 
         public class LocaleFilter extends GWTLocaleBundleFilter
         {
@@ -47,13 +47,13 @@ The solution is a locale filter.  Spiffy UI comes with a set of servlet filters 
             }
         }
         
-This filter tells the GWTLocaleBundlerFilter where our properties files are and it makes sure we send the correct localized strings to the browser.  Now we just need those strings.
+This filter tells the GWTLocaleBundleFilter where our properties files are, and it makes sure we send the correct localized strings to the browser.  Now we just need those strings.
 
 ### Added localized strings ###
 
 This application has user visible strings in two places.  The first is `src/main/java/org/spiffyui/hellospiffylocalization/client/MainPanel.html`.  This HTML file has most of the strings in our UI.  We can localize it by creating a new file:  `src/main/java/org/spiffyui/hellospiffylocalization/client/MainPanel_fr.html`.
 
-This new file same asic structure as our English file, but all the content is in French.  It still has the same HTML placeholders for our controls, they are just surrounded by French.  For example, the English string:
+This new file has the same structure as our English file, but all the content is in French.  It still has the same HTML placeholders for our controls, they are just surrounded by French.  For example, the English string:
 
         Enter your name: <span id="nameField"></span> <span id="submitButton"></span>
         
@@ -61,7 +61,7 @@ becomes the French string:
 
         Entrez votre nom: <span id="nameField"></span> <span id="submitButton"></span>
         
-Once we've translated the entire file we make sure to save it in [UTF-8](http://en.wikipedia.org/wiki/UTF-8) format so the French chracters will be encoded correctly.
+Once we've translated the entire file we make sure to save it in [UTF-8](http://en.wikipedia.org/wiki/UTF-8) format so the French characters will be encoded correctly.
 
 The rest of the strings for our application are located in `src/main/java/org/spiffyui/hellospiffylocalization/client/Index.java`.  These are just a few strings that are used with dynamic content.  For these strings we create a GWT [Messages](http://google-web-toolkit.googlecode.com/svn/javadoc/2.3/com/google/gwt/i18n/client/Messages.html) class.
 
@@ -89,7 +89,7 @@ Once we've created this ProjStrings class and properties files we can call it fr
         
 ### Putting it all together ###
 
-That's all we need to support French in our application.  When you compile it you'll see 12 permutations from the GWT compiler, one for each combination of supported browser and locale.  When this page is run the filter will find the best matching locale and inject the header in the index.html file which will allow GWT to select the correct language for your page.
+That's all we need to support French in our application.  When you compile it you'll see 12 permutations from the GWT compiler, one for each combination of supported browser and locale.  When this page is run, the filter will find the best matching locale and inject the header in the index.html file which will allow GWT to select the correct language for your page.
 
 Your application can support as many languages you want.  You can send your properties files to a real localization company and you won't have to live with my horrible French.  
 
