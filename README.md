@@ -4,7 +4,7 @@
 Hello Spiffy L10N is a sample application using the [Spiffy UI Framework](http://www.spiffyui.org) which builds a simple REST application with Apache Ant and shows you how to localize your Spiffy UI application.
 
 
-Building and Running Spiffy UI
+Building and Running Hello Spiffy L10N
 --------------------------------------
 
 Hello Spiffy L10N is built with [Apache Ant](http://ant.apache.org/) using [Apache Ivy](http://ant.apache.org/ivy/).  Once you've installed Ant go to your HelloSpiffyL10N working copy and run this command:
